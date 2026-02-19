@@ -1,58 +1,170 @@
-<div class="slide-content">
-  <h1>Project NOVA</h1>
-  <p class="subtitle">Web Platform Redesign Kickoff · Team Alpha · 2026 Q1</p>
-</div>
+<style>
+/* project-kickoff: .pk-* */
+.pk-hero-line { width: 3em; height: 3px; background: #5b8fcc; margin: .5em 0 .4em; border-radius: 2px; }
+.pk-sub  { color: #5b8fcc; font-size: 1em; margin: .1em 0 0; }
+.pk-meta { color: #777; font-size: .88em; margin: .3em 0 0; }
+.pk-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: .75em; margin-top: .5em; }
+.pk-card { border-radius: 6px; padding: .6em 1em; }
+.pk-warn { border-left: 4px solid #d45a5a; background: #fff5f5; }
+.pk-num  { font-size: 1.55em; font-weight: 700; color: #d45a5a; line-height: 1; margin: 0; }
+.pk-card-title { font-weight: 700; font-size: .88em; margin: .15em 0 .15em; }
+.pk-card-body  { margin: 0; font-size: .8em; color: #555; }
+.pk-goal { margin-bottom: .65em; }
+.pk-goal-hd {
+  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .3em;
+}
+.pk-goal-label { font-weight: 700; font-size: .88em; }
+.pk-goal-val   { font-size: .8em; color: #5b8fcc; font-weight: 600; }
+.pk-bar  { background: #e2e4ec; border-radius: 4px; height: 8px; }
+.pk-fill { height: 8px; border-radius: 4px; }
+.pk-fill-blue   { background: #5b8fcc; }
+.pk-fill-green  { background: #4aba8a; }
+.pk-fill-orange { background: #e09060; }
+.pk-tl { margin-top: .4em; }
+.pk-tl-item { display: flex; gap: .85em; margin-bottom: .65em; align-items: flex-start; }
+.pk-tl-dot {
+  flex-shrink: 0; width: 2.2em; height: 2.2em; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .75em; color: #fff;
+}
+.pk-tl-q1 { background: #5b8fcc; }
+.pk-tl-q2 { background: #4aba8a; }
+.pk-tl-q3 { background: #e09060; }
+.pk-tl-q4 { background: #c06090; }
+.pk-tl-body  { padding-top: .18em; }
+.pk-tl-title { font-weight: 700; font-size: .88em; margin: 0 0 .1em; }
+.pk-tl-desc  { font-size: .8em; color: #555; margin: 0; }
+.pk-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75em; margin-top: .5em; }
+.pk-role { border-radius: 6px; padding: .65em .9em; background: #f5f6fa; border-top: 3px solid #5b8fcc; }
+.pk-role-title { font-size: .75em; color: #5b8fcc; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 .2em; }
+.pk-role-name  { font-size: .92em; font-weight: 600; margin: 0 0 .1em; }
+.pk-role-desc  { font-size: .78em; color: #666; margin: 0; }
+</style>
+
+<h1>Project NOVA</h1>
+<div class="pk-hero-line"></div>
+<p class="pk-sub">Web Platform Redesign Kickoff</p>
+<p class="pk-meta">Team Alpha &nbsp;·&nbsp; 2026 Q1</p>
 
 ---
 
 <h2>Background</h2>
-<p>Our current web platform was built in 2019. Over time, several critical issues have emerged:</p>
-<ul>
-  <li>Page load times average 6.2 seconds on mobile</li>
-  <li>Legacy codebase blocks rapid feature delivery</li>
-  <li>UX patterns are inconsistent across 12 product areas</li>
-  <li>Accessibility compliance is at 43% — well below target</li>
-</ul>
-<p><strong>Project NOVA</strong> is a full redesign to address all of the above.</p>
+<p style="margin:.15em 0 .5em;font-size:.88em;color:#555;">Our platform, built in 2019, faces critical pain points.</p>
+<div class="pk-grid2">
+  <div class="pk-card pk-warn">
+    <p class="pk-num">6.2s</p>
+    <p class="pk-card-title">Mobile Load Time</p>
+    <p class="pk-card-body">Page load averages 6.2 seconds — far above the 2s target.</p>
+  </div>
+  <div class="pk-card pk-warn">
+    <p class="pk-num">43%</p>
+    <p class="pk-card-title">Accessibility Score</p>
+    <p class="pk-card-body">WCAG compliance at 43% — well below the required threshold.</p>
+  </div>
+  <div class="pk-card pk-warn">
+    <p class="pk-num">12</p>
+    <p class="pk-card-title">Inconsistent Areas</p>
+    <p class="pk-card-body">UX patterns vary across 12 product areas with no unified system.</p>
+  </div>
+  <div class="pk-card pk-warn">
+    <p class="pk-num">2019</p>
+    <p class="pk-card-title">Legacy Codebase</p>
+    <p class="pk-card-body">Tech debt blocks rapid feature delivery and innovation.</p>
+  </div>
+</div>
 
 ---
 
 <h2>Goals</h2>
-<ul>
-  <li>
-    <strong>Performance</strong> — reduce Time to Interactive to under 2 seconds on mobile
-  </li>
-  <li>
-    <strong>Consistency</strong> — ship a unified design system used across all product areas
-  </li>
-  <li>
-    <strong>Accessibility</strong> — achieve WCAG 2.1 AA compliance (target: 100%)
-  </li>
-</ul>
+<p style="margin:.15em 0 .65em;font-size:.88em;color:#555;">Three measurable outcomes by end of 2026.</p>
+<div class="pk-goal">
+  <div class="pk-goal-hd">
+    <span class="pk-goal-label">Performance — Time to Interactive</span>
+    <span class="pk-goal-val">6.2s → &lt; 2s</span>
+  </div>
+  <div class="pk-bar"><div class="pk-fill pk-fill-blue" style="width:32%"></div></div>
+</div>
+<div class="pk-goal">
+  <div class="pk-goal-hd">
+    <span class="pk-goal-label">Consistency — Design System Coverage</span>
+    <span class="pk-goal-val">0% → 100%</span>
+  </div>
+  <div class="pk-bar"><div class="pk-fill pk-fill-green" style="width:20%"></div></div>
+</div>
+<div class="pk-goal">
+  <div class="pk-goal-hd">
+    <span class="pk-goal-label">Accessibility — WCAG 2.1 AA Compliance</span>
+    <span class="pk-goal-val">43% → 100%</span>
+  </div>
+  <div class="pk-bar"><div class="pk-fill pk-fill-orange" style="width:43%"></div></div>
+</div>
 
 ---
 
 <h2>Schedule</h2>
-<table>
-  <thead>
-    <tr><th>Quarter</th><th>Milestone</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Q1 2026</td><td>Discovery, audit, and design system foundations</td></tr>
-    <tr><td>Q2 2026</td><td>Core pages rebuilt — Home, Search, Product</td></tr>
-    <tr><td>Q3 2026</td><td>Account, Checkout, and Dashboard migration</td></tr>
-    <tr><td>Q4 2026</td><td>Full rollout, performance validation, legacy sunset</td></tr>
-  </tbody>
-</table>
+<div class="pk-tl">
+  <div class="pk-tl-item">
+    <div class="pk-tl-dot pk-tl-q1">Q1</div>
+    <div class="pk-tl-body">
+      <p class="pk-tl-title">Discovery &amp; Design System Foundations</p>
+      <p class="pk-tl-desc">Audit current platform, establish component library baseline.</p>
+    </div>
+  </div>
+  <div class="pk-tl-item">
+    <div class="pk-tl-dot pk-tl-q2">Q2</div>
+    <div class="pk-tl-body">
+      <p class="pk-tl-title">Core Pages Rebuilt — Home, Search, Product</p>
+      <p class="pk-tl-desc">Migrate top-traffic pages to the new design system.</p>
+    </div>
+  </div>
+  <div class="pk-tl-item">
+    <div class="pk-tl-dot pk-tl-q3">Q3</div>
+    <div class="pk-tl-body">
+      <p class="pk-tl-title">Account, Checkout &amp; Dashboard Migration</p>
+      <p class="pk-tl-desc">Complete transactional flows and authenticated views.</p>
+    </div>
+  </div>
+  <div class="pk-tl-item">
+    <div class="pk-tl-dot pk-tl-q4">Q4</div>
+    <div class="pk-tl-body">
+      <p class="pk-tl-title">Full Rollout &amp; Legacy Sunset</p>
+      <p class="pk-tl-desc">Performance validation, final QA, and decommission of old platform.</p>
+    </div>
+  </div>
+</div>
 
 ---
 
 <h2>Team Structure</h2>
-<ul>
-  <li><strong>Product Lead</strong> — Alex Kim</li>
-  <li><strong>Design Lead</strong> — Priya Nair</li>
-  <li><strong>Engineering Lead</strong> — Marcus Vidal</li>
-  <li><strong>Frontend Engineers</strong> — 4 members</li>
-  <li><strong>QA / Accessibility</strong> — 2 members</li>
-  <li><strong>Stakeholder</strong> — VP of Product (monthly review)</li>
-</ul>
+<div class="pk-grid3">
+  <div class="pk-role">
+    <p class="pk-role-title">Product</p>
+    <p class="pk-role-name">Alex Kim</p>
+    <p class="pk-role-desc">Product Lead — vision &amp; roadmap</p>
+  </div>
+  <div class="pk-role">
+    <p class="pk-role-title">Design</p>
+    <p class="pk-role-name">Priya Nair</p>
+    <p class="pk-role-desc">Design Lead — system &amp; UX</p>
+  </div>
+  <div class="pk-role">
+    <p class="pk-role-title">Engineering</p>
+    <p class="pk-role-name">Marcus Vidal</p>
+    <p class="pk-role-desc">Engineering Lead — architecture</p>
+  </div>
+  <div class="pk-role">
+    <p class="pk-role-title">Frontend</p>
+    <p class="pk-role-name">4 members</p>
+    <p class="pk-role-desc">Implementation &amp; component build</p>
+  </div>
+  <div class="pk-role">
+    <p class="pk-role-title">QA / A11y</p>
+    <p class="pk-role-name">2 members</p>
+    <p class="pk-role-desc">Testing &amp; accessibility review</p>
+  </div>
+  <div class="pk-role">
+    <p class="pk-role-title">Stakeholder</p>
+    <p class="pk-role-name">VP of Product</p>
+    <p class="pk-role-desc">Monthly review &amp; sign-off</p>
+  </div>
+</div>

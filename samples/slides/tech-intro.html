@@ -1,47 +1,159 @@
-# Your browser is the IDE
+<style>
+/* tech-intro: .ti-* */
+.ti-hero {
+  position: absolute; inset: 0; margin: -48px -64px;
+  background: linear-gradient(135deg, #1e1f25 0%, #1a3055 50%, #0d2040 100%);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 64px 96px;
+}
+.ti-hero h1 { color: #fff; font-size: 2.4em; letter-spacing: .04em; margin: 0 0 .4em; }
+.ti-hero .ti-sub { color: #5b8fcc; font-size: 1.1em; margin: 0; }
+.ti-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .75em; margin-top: .6em;
+}
+.ti-card { border-radius: 6px; padding: .65em 1em; }
+.ti-warn { border-left: 4px solid #d45a5a; background: #fff5f5; }
+.ti-ok   { border-left: 4px solid #4aba8a; background: #f0faf5; }
+.ti-card-title { font-weight: 700; margin: 0 0 .2em; font-size: .92em; }
+.ti-card-body  { margin: 0; font-size: .82em; color: #444; }
+.ti-cols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: start;
+  margin-top: .4em;
+}
+.ti-code-box { background: #1e1f25; border-radius: 8px; overflow: hidden; }
+.ti-code-tab {
+  background: #0d1620; color: #5b8fcc; font-size: .75em;
+  padding: .35em .9em; font-family: monospace;
+}
+.ti-code-body {
+  color: #c9d1d9; font-size: .78em; padding: .75em 1em;
+  font-family: monospace; white-space: pre; line-height: 1.55;
+}
+.ti-tag {
+  display: inline-block; background: #5b8fcc22; color: #5b8fcc;
+  border: 1px solid #5b8fcc55; border-radius: 4px;
+  font-size: .75em; padding: .1em .55em; margin: .15em .1em;
+}
+</style>
 
-Zero install. Zero setup. Just open and build.
+<div class="ti-hero">
+  <h1>Your browser is the IDE</h1>
+  <p class="ti-sub">Zero install. Zero setup. Just open and build.</p>
+</div>
 
 ---
 
-## The Problem
-
-- Modern IDEs are heavy — VS Code, WebStorm, Figma...
-- Installation takes time and breaks across machines
-- Sharing work requires accounts, plugins, or exports
-- Creative flow stops the moment setup begins
-
----
-
-## The Solution
-
-**Single HTML files. Nothing to install.**
-
-- Open in any browser — Chrome, Firefox, Safari
-- Works offline, on any OS, on any device
-- Share by sending one file
-- No accounts. No extensions. No build step.
-
----
-
-## designer.html
-
-A visual HTML layout editor, right in your browser.
-
-- Drag-and-drop canvas with live preview
-- Insert text, images, shapes, and containers
-- Export clean HTML with one click
-- Grid snapping and alignment guides built in
+<h2>The Problem</h2>
+<p style="margin:.2em 0 .5em;font-size:.88em;color:#555;">Why traditional tools slow you down</p>
+<div class="ti-grid">
+  <div class="ti-card ti-warn">
+    <p class="ti-card-title">⚠️ Heavy IDEs</p>
+    <p class="ti-card-body">VS Code, WebStorm, Figma — each requires install, updates, and config.</p>
+  </div>
+  <div class="ti-card ti-warn">
+    <p class="ti-card-title">⚠️ Slow Setup</p>
+    <p class="ti-card-body">Installation breaks across machines. Hours lost before a single line.</p>
+  </div>
+  <div class="ti-card ti-warn">
+    <p class="ti-card-title">⚠️ Sharing Friction</p>
+    <p class="ti-card-body">Accounts, plugins, or exports required. Work gets stuck in silos.</p>
+  </div>
+  <div class="ti-card ti-warn">
+    <p class="ti-card-title">⚠️ Broken Flow</p>
+    <p class="ti-card-body">Creative momentum dies the moment setup begins.</p>
+  </div>
+</div>
 
 ---
 
-## slides.html
+<h2>The Solution</h2>
+<p style="margin:.2em 0 .5em;font-size:.88em;color:#555;">Single HTML files. Nothing to install.</p>
+<div class="ti-grid">
+  <div class="ti-card ti-ok">
+    <p class="ti-card-title">✅ Any Browser</p>
+    <p class="ti-card-body">Chrome, Firefox, Safari — no extensions needed.</p>
+  </div>
+  <div class="ti-card ti-ok">
+    <p class="ti-card-title">✅ Works Offline</p>
+    <p class="ti-card-body">All logic is self-contained. Internet optional.</p>
+  </div>
+  <div class="ti-card ti-ok">
+    <p class="ti-card-title">✅ Share Instantly</p>
+    <p class="ti-card-body">Send one file. Recipient opens and uses — done.</p>
+  </div>
+  <div class="ti-card ti-ok">
+    <p class="ti-card-title">✅ Zero Lock-in</p>
+    <p class="ti-card-body">No accounts. No build step. No vendor dependency.</p>
+  </div>
+</div>
 
-A Markdown & HTML slide editor with instant preview.
+---
 
-- Write slides in plain Markdown or raw HTML
-- Split slides with `---` — no special syntax
-- Live side-by-side editor and preview
-- Present directly from the browser — fullscreen ready
+<h2>designer.html</h2>
+<p style="margin:.1em 0 .6em;font-size:.88em;color:#555;">A visual HTML layout editor, right in your browser.</p>
+<div class="ti-cols">
+  <div>
+    <div style="margin:0 0 .5em;">
+      <span class="ti-tag">drag &amp; drop</span>
+      <span class="ti-tag">live preview</span>
+      <span class="ti-tag">grid snap</span>
+    </div>
+    <div style="margin:0 0 .8em;">
+      <span class="ti-tag">export HTML</span>
+      <span class="ti-tag">alignment guides</span>
+    </div>
+    <p style="font-size:.85em;color:#444;margin:0;">
+      Insert text, images, shapes, and containers.<br>
+      Export clean HTML with one click.
+    </p>
+  </div>
+  <div class="ti-code-box">
+    <div class="ti-code-tab">designer.html — Output</div>
+    <div class="ti-code-body">&lt;div style="
+  position: absolute;
+  left: 120px;
+  top: 80px;
+  width: 320px;
+"&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;p&gt;Styled visually.&lt;/p&gt;
+&lt;/div&gt;</div>
+  </div>
+</div>
 
-**Get started:** open `designer.html` or `slides.html` in your browser.
+---
+
+<h2>slides.html</h2>
+<p style="margin:.1em 0 .6em;font-size:.88em;color:#555;">A Markdown &amp; HTML slide editor with instant preview.</p>
+<div class="ti-cols">
+  <div>
+    <div style="margin:0 0 .5em;">
+      <span class="ti-tag">Markdown</span>
+      <span class="ti-tag">raw HTML</span>
+      <span class="ti-tag">split with ---</span>
+    </div>
+    <div style="margin:0 0 .8em;">
+      <span class="ti-tag">live preview</span>
+      <span class="ti-tag">fullscreen present</span>
+    </div>
+    <p style="font-size:.85em;color:#444;margin:0;">
+      This very slide was built with slides.html.<br>
+      Use <code style="background:#f0f1f5;border-radius:3px;padding:0 4px;">---</code> to split slides. Mix Markdown and HTML freely.
+    </p>
+  </div>
+  <div class="ti-code-box">
+    <div class="ti-code-tab">slides.html — Source</div>
+    <div class="ti-code-body"># Slide Title
+
+Plain Markdown works.
+
+---
+
+&lt;h2&gt;Or raw HTML&lt;/h2&gt;
+&lt;div style="
+  background: #5b8fcc;
+  color: #fff;
+  padding: 1em;
+"&gt;Style freely.&lt;/div&gt;</div>
+  </div>
+</div>
