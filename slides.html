@@ -1602,6 +1602,15 @@
       };
 
       // ========================================
+      // SAMPLE MAP
+      // ========================================
+      var SAMPLE_MAP = {
+        'tech-intro':       'samples/slides/tech-intro.html',
+        'project-kickoff':  'samples/slides/project-kickoff.html',
+        'weekly-report':    'samples/slides/weekly-report.html'
+      };
+
+      // ========================================
       // INITIALIZATION
       // ========================================
       function initialize() {
@@ -1617,7 +1626,36 @@
             'Alt-F': 'findPersistent'
           }
         });
-        loadSavedCode();
+
+        // URLパラメータ取得
+        var sampleId = (function() {
+          try { return new URLSearchParams(window.location.search).get('sample'); }
+          catch(e) { return null; }
+        })();
+
+        if (sampleId && SAMPLE_MAP[sampleId]) {
+          // マップに存在するサンプルのみ読み込み
+          elements.htmlEditor.setValue('<!-- Loading sample... -->');
+          fetch(SAMPLE_MAP[sampleId])
+            .then(function(res) {
+              if (!res.ok) throw new Error(res.status);
+              return res.text();
+            })
+            .then(function(content) {
+              elements.htmlEditor.setValue(content);
+              updatePreview();
+            })
+            .catch(function(err) {
+              console.warn('[html-preview] Sample load failed:', sampleId, err);
+              loadSavedCode();
+              updatePreview();
+            });
+        } else {
+          if (sampleId) {
+            console.warn('[html-preview] Unknown sample:', sampleId);
+          }
+          loadSavedCode();
+        }
 
         var savedTheme;
         try { savedTheme = localStorage.getItem(CONFIG.themeStorageKey); } catch(e) {}

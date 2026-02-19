@@ -1232,6 +1232,16 @@
       };
 
       // ========================================
+      // SAMPLE MAP
+      // ========================================
+      var SAMPLE_MAP = {
+        'portfolio':    'samples/designer/portfolio.html',
+        'dashboard':    'samples/designer/dashboard.html',
+        'landing-cafe': 'samples/designer/landing-cafe.html',
+        'resume':       'samples/designer/resume.html'
+      };
+
+      // ========================================
       // INITIALIZATION
       // ========================================
       function initialize() {
@@ -1244,7 +1254,36 @@
           styleActiveLine: true,
           extraKeys: { 'Alt-F': 'findPersistent' }
         });
-        loadSavedCode();
+
+        // URLパラメータ取得
+        var sampleId = (function() {
+          try { return new URLSearchParams(window.location.search).get('sample'); }
+          catch(e) { return null; }
+        })();
+
+        if (sampleId && SAMPLE_MAP[sampleId]) {
+          // マップに存在するサンプルのみ読み込み
+          elements.htmlEditor.setValue('<!-- Loading sample... -->');
+          fetch(SAMPLE_MAP[sampleId])
+            .then(function(res) {
+              if (!res.ok) throw new Error(res.status);
+              return res.text();
+            })
+            .then(function(content) {
+              elements.htmlEditor.setValue(content);
+              updatePreview();
+            })
+            .catch(function(err) {
+              console.warn('[html-preview] Sample load failed:', sampleId, err);
+              loadSavedCode();
+              updatePreview();
+            });
+        } else {
+          if (sampleId) {
+            console.warn('[html-preview] Unknown sample:', sampleId);
+          }
+          loadSavedCode();
+        }
 
         var savedTheme;
         try { savedTheme = localStorage.getItem(CONFIG.themeStorageKey); } catch(e) {}
