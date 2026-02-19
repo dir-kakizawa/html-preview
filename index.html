@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline' fonts.googleapis.com; style-src 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com; font-src fonts.gstatic.com; frame-src 'self';">
+  <title>html-preview — Your browser is the only IDE you need.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void:       #08090d;
+      --surface:    #0f1117;
+      --elevated:   #161b27;
+      --border:     rgba(255,255,255,0.07);
+      --border-glow:rgba(77,159,255,0.35);
+      --accent:     #4d9fff;
+      --accent-dim: rgba(77,159,255,0.15);
+      --accent-2:   #a78bfa;
+      --text-1:     #e8eaf2;
+      --text-2:     #8892a4;
+      --text-3:     #4a5568;
+      --grad:       linear-gradient(90deg, #4d9fff, #a78bfa);
+      --r:          10px;
+      --r-lg:       16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--void);
+      color: var(--text-1);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Typography ────────────────────────────── */
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.2; }
+    code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #4d9fff, #a78bfa, #4d9fff);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 0% }
+      100% { background-position: 200% }
+    }
+
+    /* ── Layout ────────────────────────────────── */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 96px 0; }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 560px;
+    }
+
+    /* ── Scroll Animations ─────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in:nth-child(2) { transition-delay: 0.1s; }
+    .fade-in:nth-child(3) { transition-delay: 0.2s; }
+    .fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ── Header ────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8,9,13,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--text-1);
+    }
+
+    /* ── Hero ──────────────────────────────────── */
+    .hero {
+      padding-top: 160px;
+      padding-bottom: 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(77,159,255,0.10) 0%, transparent 65%),
+        radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(77,159,255,0.25);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-2);
+      margin-bottom: 48px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: var(--accent);
+      color: #000;
+      border-radius: var(--r);
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover {
+      background: #6aadff;
+      box-shadow: 0 0 30px rgba(77,159,255,0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: transparent;
+      color: var(--text-1);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      font-weight: 600;
+      font-size: 15px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(77,159,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    /* ── Tools Section ─────────────────────────── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 640px) {
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 36px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tool-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 0 40px rgba(77,159,255,0.08), 0 8px 32px rgba(0,0,0,0.4);
+      transform: translateY(-4px);
+    }
+
+    .tool-card:hover::before { opacity: 1; }
+
+    .tool-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(77,159,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tool-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .tool-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .tool-desc {
+      font-size: 14px;
+      color: var(--text-2);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .tool-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .tool-features li {
+      font-size: 13px;
+      color: var(--text-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .tool-features li::before {
+      content: '─';
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      transition: gap 0.2s;
+    }
+    .tool-link:hover { gap: 10px; }
+
+    /* ── Samples Gallery ───────────────────────── */
+    .samples-section { background: var(--surface); }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin: 40px 0 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent-dim);
+      border-color: rgba(77,159,255,0.4);
+      color: var(--accent);
+    }
+
+    .samples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .samples-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .samples-grid { grid-template-columns: 1fr; }
+    }
+
+    .sample-card {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+
+    .sample-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 0 30px rgba(77,159,255,0.07), 0 4px 24px rgba(0,0,0,0.3);
+      transform: translateY(-3px);
+    }
+
+    /* iframe preview */
+    .preview-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .preview-iframe {
+      width: 333%;
+      height: 667px;
+      transform: scale(0.3);
+      transform-origin: top left;
+      pointer-events: none;
+      border: none;
+      display: block;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--elevated));
+      pointer-events: none;
+    }
+
+    /* slides card preview (no iframe) */
+    .slides-preview {
+      height: 200px;
+      background: linear-gradient(135deg, #0f1117 0%, #161b27 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slides-preview-icon {
+      font-size: 32px;
+      opacity: 0.8;
+    }
+
+    .slides-slide-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    .slides-preview-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 120px;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .slides-preview-line {
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+    }
+    .slides-preview-line:first-child { width: 80%; background: rgba(77,159,255,0.4); }
+    .slides-preview-line:nth-child(2) { width: 60%; }
+    .slides-preview-line:nth-child(3) { width: 40%; }
+
+    /* card body */
+    .card-body {
+      padding: 18px 20px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-1);
+    }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-designer {
+      background: rgba(77,159,255,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(77,159,255,0.25);
+    }
+
+    .badge-slides {
+      background: rgba(167,139,250,0.12);
+      color: var(--accent-2);
+      border: 1px solid rgba(167,139,250,0.25);
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.15s;
+    }
+    .card-link:hover { gap: 7px; }
+
+    .card-hint {
+      font-size: 11px;
+      color: var(--text-3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card-dl {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .card-dl:hover {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    .slides-how {
+      font-size: 11px;
+      color: var(--text-3);
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+    }
+
+    /* ── Philosophy Section ────────────────────── */
+    .philosophy {
+      text-align: center;
+    }
+
+    .philosophy-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 500;
+      color: var(--text-2);
+      margin: 8px 0 64px;
+      letter-spacing: 0.05em;
+    }
+
+    .philosophy-tagline span { color: var(--text-1); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: left;
+    }
+
+    @media (max-width: 700px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 32px;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(167,139,250,0.3);
+      transform: translateY(-3px);
+    }
+
+    .feature-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-1);
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* ── Footer ────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    .footer-sep {
+      width: 1px; height: 14px;
+      background: var(--border);
+    }
+
+    .footer-meta {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    .footer-right {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    /* ── Responsive ────────────────────────────── */
+    @media (max-width: 480px) {
+      section { padding: 64px 0; }
+      .hero { padding-top: 120px; padding-bottom: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────── -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        html-preview
+      </div>
+      <a href="https://github.com/dir-kakizawa/html-preview" class="btn-ghost" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Hero ───────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        Single × Stand Alone
+      </div>
+      <h1 class="hero-title">
+        Your browser is the<br>
+        <span class="gradient-text">only IDE you need.</span>
+      </h1>
+      <p class="hero-sub">No npm. &nbsp;No install. &nbsp;No compromise.</p>
+      <div class="hero-ctas">
+        <a href="designer.html" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Visual HTML Designer
+        </a>
+        <a href="slides.html" class="btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Slide Editor
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tools ──────────────────────────────────── -->
+  <section>
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">// tools</p>
+        <h2 class="section-title">ブラウザで開くだけ。</h2>
+        <p class="section-desc">2本のツールで、HTMLの作成・編集・プレゼンまで全部ブラウザの中で完結する。</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card fade-in">
+          <div class="tool-icon">✏️</div>
+          <p class="tool-name">designer.html</p>
+          <h3 class="tool-title">Visual HTML Designer</h3>
+          <p class="tool-desc">
+            HTMLをリアルタイムで書いて、即座にプレビューを見ながら直接編集できるエディタ。
+            AIが生成したコードを貼り付けて、デザインモードで調整して、Ctrl+Sで保存する。
+          </p>
+          <ul class="tool-features">
+            <li>CodeMirror 搭載シンタックスハイライトエディタ</li>
+            <li>リアルタイムプレビュー（iframe）</li>
+            <li>デザインモード Ctrl+D — 色・フォント・余白をGUI操作</li>
+            <li>レイアウト切り替え・ダーク/ライトテーマ</li>
+            <li>HTMLファイルを開く / Ctrl+S でダウンロード</li>
+          </ul>
+          <a href="designer.html" class="tool-link">
+            Open Designer →
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-icon">📽️</div>
+          <p class="tool-name">slides.html</p>
+          <h3 class="tool-title">Slide Presentation Editor</h3>
+          <p class="tool-desc">
+            HTMLまたはMarkdownでスライドを書いて、ブラウザ上でそのままプレゼンするエディタ。
+            F5でフルスクリーン発表モード。Ctrl+PでPDF出力。
+          </p>
+          <ul class="tool-features">
+            <li>HTML / Markdown でスライド記述（--- で区切る）</li>
+            <li>スライド単位の管理・サムネイル一覧</li>
+            <li>プレゼンモード F5 — フルスクリーン発表ビュー</li>
+            <li>アスペクト比切り替え（16:9 / 4:3）</li>
+            <li>印刷 Ctrl+P（PDF出力対応）</li>
+          </ul>
+          <a href="slides.html" class="tool-link">
+            Open Slides →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Samples Gallery ────────────────────────── -->
+  <section class="samples-section">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">// samples</p>
+        <h2 class="section-title">サンプルギャラリー</h2>
+        <p class="section-desc">すぐに使えるサンプルHTML集。designer サンプルはそのままブラウザで開けて、slides サンプルはダウンロードして slides.html で読み込む。</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="designer">Designer</button>
+        <button class="filter-btn" data-filter="slides">Slides</button>
+      </div>
+
+      <div class="samples-grid">
+
+        <!-- portfolio.html -->
+        <div class="sample-card fade-in" data-type="designer">
+          <div class="preview-wrapper">
+            <iframe class="preview-iframe" data-src="samples/designer/portfolio.html"
+              sandbox="allow-scripts" loading="lazy" title="portfolio preview"></iframe>
+            <div class="preview-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Portfolio</span>
+              <span class="badge badge-designer">designer</span>
+            </div>
+            <p class="card-desc">ダークテーマの個人ポートフォリオ。スキルバー・プロジェクトグリッド。</p>
+            <div class="card-actions">
+              <a href="samples/designer/portfolio.html" class="card-link" target="_blank">Open →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- dashboard.html -->
+        <div class="sample-card fade-in" data-type="designer">
+          <div class="preview-wrapper">
+            <iframe class="preview-iframe" data-src="samples/designer/dashboard.html"
+              sandbox="allow-scripts" loading="lazy" title="dashboard preview"></iframe>
+            <div class="preview-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Dashboard</span>
+              <span class="badge badge-designer">designer</span>
+            </div>
+            <p class="card-desc">管理画面UIモック。サイドバー・統計カード・CSSバーグラフ。</p>
+            <div class="card-actions">
+              <a href="samples/designer/dashboard.html" class="card-link" target="_blank">Open →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- landing-cafe.html -->
+        <div class="sample-card fade-in" data-type="designer">
+          <div class="preview-wrapper">
+            <iframe class="preview-iframe" data-src="samples/designer/landing-cafe.html"
+              sandbox="allow-scripts" loading="lazy" title="cafe landing preview"></iframe>
+            <div class="preview-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Cafe Landing</span>
+              <span class="badge badge-designer">designer</span>
+            </div>
+            <p class="card-desc">カフェのランディングページ。ウォームカラー・メニューカード・CSS湯気アニメ。</p>
+            <div class="card-actions">
+              <a href="samples/designer/landing-cafe.html" class="card-link" target="_blank">Open →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- resume.html -->
+        <div class="sample-card fade-in" data-type="designer">
+          <div class="preview-wrapper">
+            <iframe class="preview-iframe" data-src="samples/designer/resume.html"
+              sandbox="allow-scripts" loading="lazy" title="resume preview"></iframe>
+            <div class="preview-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Resume / CV</span>
+              <span class="badge badge-designer">designer</span>
+            </div>
+            <p class="card-desc">2カラム履歴書。タイムライン・スキルドット表示・@media print 対応。</p>
+            <div class="card-actions">
+              <a href="samples/designer/resume.html" class="card-link" target="_blank">Open →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- tech-intro.html (slides) -->
+        <div class="sample-card fade-in" data-type="slides">
+          <div class="slides-preview">
+            <div class="slides-preview-icon">🖥️</div>
+            <div class="slides-slide-count">5 slides · Markdown</div>
+            <div class="slides-preview-lines">
+              <div class="slides-preview-line"></div>
+              <div class="slides-preview-line"></div>
+              <div class="slides-preview-line"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Tech Intro</span>
+              <span class="badge badge-slides">slides</span>
+            </div>
+            <p class="card-desc">html-preview ツール紹介デッキ。Markdown 記法・5スライド。</p>
+            <div class="card-actions">
+              <a href="samples/slides/tech-intro.html" download class="card-dl">↓ Download</a>
+            </div>
+            <p class="slides-how">slides.html を開く → Ctrl+O でこのファイルを選択</p>
+          </div>
+        </div>
+
+        <!-- project-kickoff.html (slides) -->
+        <div class="sample-card fade-in" data-type="slides">
+          <div class="slides-preview">
+            <div class="slides-preview-icon">🚀</div>
+            <div class="slides-slide-count">5 slides · HTML</div>
+            <div class="slides-preview-lines">
+              <div class="slides-preview-line"></div>
+              <div class="slides-preview-line"></div>
+              <div class="slides-preview-line"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Project Kickoff</span>
+              <span class="badge badge-slides">slides</span>
+            </div>
+            <p class="card-desc">プロジェクトキックオフ資料テンプレ。HTML 記法・5スライド。</p>
+            <div class="card-actions">
+              <a href="samples/slides/project-kickoff.html" download class="card-dl">↓ Download</a>
+            </div>
+            <p class="slides-how">slides.html を開く → Ctrl+O でこのファイルを選択</p>
+          </div>
+        </div>
+
+        <!-- weekly-report.html (slides) -->
+        <div class="sample-card fade-in" data-type="slides">
+          <div class="slides-preview">
+            <div class="slides-preview icon">📋</div>
+            <div class="slides-slide-count">3 slides · Markdown</div>
+            <div class="slides-preview-lines">
+              <div class="slides-preview-line"></div>
+              <div class="slides-preview-line"></div>
+              <div class="slides-preview-line"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-title">Weekly Report</span>
+              <span class="badge badge-slides">slides</span>
+            </div>
+            <p class="card-desc">週次報告テンプレート。Markdown 記法・3スライド・KPI テーブル。</p>
+            <div class="card-actions">
+              <a href="samples/slides/weekly-report.html" download class="card-dl">↓ Download</a>
+            </div>
+            <p class="slides-how">slides.html を開く → Ctrl+O でこのファイルを選択</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Philosophy ─────────────────────────────── -->
+  <section class="philosophy">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">// design philosophy</p>
+        <h2 class="section-title">制約は仕様だ。</h2>
+        <p class="philosophy-tagline">
+          <span>Single</span> × <span>Stand Alone</span>
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <p class="feature-num">01</p>
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Zero Install</h3>
+          <p class="feature-desc">
+            ブラウザで開くだけで動く。npm も pip も不要。
+            インストール申請書も上長承認も必要ない。
+            HTMLファイルとブラウザだけで成立する、徹底した孤独主義。
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <p class="feature-num">02</p>
+          <div class="feature-icon">🖥️</div>
+          <h3 class="feature-title">Always Runs</h3>
+          <p class="feature-desc">
+            RAM 8GB、第6世代 Core i5。そういう端末でも動く。
+            Electron は重い。VS Code は重い。このツールはタブ1枚。
+            ファンが唸っている端末でも、ブラウザは開いている。
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <p class="feature-num">03</p>
+          <div class="feature-icon">🔓</div>
+          <h3 class="feature-title">Open Source</h3>
+          <p class="feature-desc">
+            MIT License。コードは全てオープン。
+            1ファイル = 1ツールの原則は、検査しやすさでもある。
+            何が動いているかを、ブラウザのデベロッパーツールで確認できる。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────── -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">html-preview</span>
+        <div class="footer-sep"></div>
+        <span class="footer-meta">MIT License</span>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/dir-kakizawa/html-preview" class="btn-ghost" style="font-size:12px;padding:5px 12px;" target="_blank" rel="noopener">
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll-in animations ────────────────────
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          fadeObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // ── Lazy iframe loading ─────────────────────
+    const iframeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.target.dataset.src && !e.target.src) {
+          e.target.src = e.target.dataset.src;
+          iframeObserver.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '300px' });
+
+    document.querySelectorAll('iframe[data-src]').forEach(el => iframeObserver.observe(el));
+
+    // ── Filter tabs ─────────────────────────────
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.sample-card').forEach(card => {
+          if (filter === 'all' || card.dataset.type === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

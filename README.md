@@ -2,6 +2,8 @@
 
 > **Single × Stand Alone** — 1ファイルに全部詰め込む、徹頭徹尾の孤独主義。
 
+**[→ Live Demo (GitHub Pages)](https://dir-kakizawa.github.io/html-preview/)**
+
 ブラウザさえあれば動く、インストール不要のHTMLツール集。
 `npm install` なんて知らない。`package.json` は幻。世界はHTMLファイル1枚で足りる。
 
@@ -125,6 +127,11 @@ Claude Code を使っている人たちと同じゴールに、別のルート�
 
 ## ツール一覧
 
+| ファイル | 説明 | ライブデモ |
+|---------|------|-----------|
+| `designer.html` | Visual HTML Designer — リアルタイムプレビュー・デザインモード付きエディタ | [開く](https://dir-kakizawa.github.io/html-preview/designer.html) |
+| `slides.html` | Slide Presentation Editor — HTML/Markdownでスライド作成・プレゼン | [開く](https://dir-kakizawa.github.io/html-preview/slides.html) |
+
 ### `designer.html` — Visual HTML Designer
 
 HTMLをリアルタイムで書いて、即座にプレビューを見ながら直接編集できるエディタ。
@@ -185,6 +192,26 @@ HTMLでスライドを作って、ブラウザ上でプレゼンするための�
 
 これは「制約」ではなく「仕様」。
 1ファイルに収まらないものは、このリポジトリには存在しない。
+
+---
+
+## サンプル
+
+```
+samples/
+├── designer/
+│   ├── portfolio.html      # 個人ポートフォリオ（ダークテーマ）
+│   ├── dashboard.html      # 管理画面UIモック
+│   ├── landing-cafe.html   # カフェ LP
+│   └── resume.html         # 履歴書/CV（print 対応）
+└── slides/
+    ├── tech-intro.html     # このツール紹介（Markdown 記法）
+    ├── project-kickoff.html # キックオフ資料（HTML 記法）
+    └── weekly-report.html  # 週次報告テンプレ（Markdown）
+```
+
+`samples/designer/` 内のファイルはブラウザで直接開いて確認できる。
+`samples/slides/` 内のファイルは `slides.html` の「ファイルを開く」（または `Ctrl+O`）で読み込む。
 
 ---
 

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Brun — Artisan Cafe</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown-deep: #2c1810;
+      --brown-dark: #3d2314;
+      --brown-mid: #6b3d28;
+      --brown-warm: #8b5e3c;
+      --gold: #d4a853;
+      --gold-light: #e8c070;
+      --gold-pale: #f0d49a;
+      --cream: #f5e6c8;
+      --cream-light: #faf3e6;
+      --cream-pale: #fffdf7;
+      --text-dark: #1e0f08;
+      --text-mid: #4a2d1a;
+      --text-light: #8b6b50;
+      --text-pale: #b89a7a;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream-pale);
+      color: var(--text-dark);
+      font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(44,24,16,0.95);
+      backdrop-filter: blur(8px);
+      padding: 0 3rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(212,168,83,0.2);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-logo-icon {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .nav-logo-text {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--cream);
+      letter-spacing: 1px;
+    }
+    .nav-logo-sub {
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: block;
+      margin-top: -2px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,230,200,0.75);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--brown-deep) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--brown-deep) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(107,61,40,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(44,24,16,0.6) 0%, transparent 50%),
+        linear-gradient(135deg, #2c1810 0%, #4a2d1a 40%, #6b3d28 70%, #3d2314 100%);
+    }
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(212,168,83,0.08) 1px, transparent 0);
+      background-size: 28px 28px;
+    }
+    .hero-steam {
+      position: absolute;
+      bottom: 0; right: 10%;
+      width: 300px; height: 400px;
+      background: radial-gradient(ellipse at 50% 100%, rgba(212,168,83,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 3rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: bold;
+      line-height: 1.15;
+      color: var(--cream);
+      letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: rgba(245,230,200,0.7);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+    .hero-buttons { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--brown-deep);
+      padding: 0.9rem 2.25rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(212,168,83,0.3);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      box-shadow: 0 6px 28px rgba(212,168,83,0.45);
+      transform: translateY(-1px);
+    }
+    .btn-outline-cream {
+      color: var(--cream);
+      padding: 0.9rem 2.25rem;
+      border: 1px solid rgba(245,230,200,0.3);
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-outline-cream:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212,168,83,0.05);
+    }
+    /* Hero visual — CSS cup */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-cup-scene {
+      position: relative;
+      width: 260px;
+      height: 300px;
+    }
+    .cup-shadow {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      filter: blur(8px);
+    }
+    .saucer {
+      position: absolute;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 20px;
+      background: linear-gradient(180deg, #c8a06a, #8b5e3c);
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .saucer::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 10%;
+      width: 80%;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    .cup-body {
+      position: absolute;
+      bottom: 48px; left: 50%;
+      transform: translateX(-50%);
+      width: 140px; height: 120px;
+      background: linear-gradient(160deg, #d4a853, #8b5e3c 60%, #6b3d28);
+      clip-path: polygon(8% 0%, 92% 0%, 84% 100%, 16% 100%);
+      border-radius: 4px;
+      box-shadow: inset -10px 0 20px rgba(0,0,0,0.2);
+    }
+    .cup-rim {
+      position: absolute;
+      bottom: 165px; left: 50%;
+      transform: translateX(-50%);
+      width: 156px; height: 16px;
+      background: linear-gradient(180deg, #e8c070, #c8943a);
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .cup-handle {
+      position: absolute;
+      bottom: 88px; right: 36px;
+      width: 36px; height: 55px;
+      border: 10px solid #8b5e3c;
+      border-left: none;
+      border-radius: 0 30px 30px 0;
+    }
+    .coffee-surface {
+      position: absolute;
+      bottom: 172px; left: 50%;
+      transform: translateX(-50%);
+      width: 118px; height: 118px;
+      background: radial-gradient(ellipse at 40% 40%, #6b3d28 0%, #3d1f10 60%, #2c1510 100%);
+      border-radius: 50% 50% 48% 48% / 45% 45% 55% 55%;
+      overflow: hidden;
+    }
+    .latte-art {
+      position: absolute;
+      top: 20px; left: 50%;
+      transform: translateX(-50%);
+      width: 70px; height: 75px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(212,168,83,0.5) 0%, transparent 60%);
+      border-radius: 50%;
+    }
+    .latte-art::before {
+      content: '';
+      position: absolute;
+      top: 10px; left: 15px;
+      width: 40px; height: 45px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(232,192,112,0.4) 0%, transparent 70%);
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    }
+    .steam-1, .steam-2, .steam-3 {
+      position: absolute;
+      bottom: 290px;
+      width: 3px;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      background: none;
+    }
+    .steam-wisp {
+      position: absolute;
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, rgba(245,230,200,0.4), transparent);
+      border-radius: 2px;
+      animation: steamRise 2.5s ease-in-out infinite;
+    }
+    .steam-1 .steam-wisp { left: 30px; animation-delay: 0s; }
+    .steam-2 .steam-wisp { left: 70px; animation-delay: 0.8s; height: 55px; }
+    .steam-3 .steam-wisp { left: 110px; animation-delay: 1.5s; height: 35px; }
+    @keyframes steamRise {
+      0% { opacity: 0; transform: translateY(0) scaleX(1); }
+      30% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(-50px) scaleX(2); }
+    }
+    .hero-badges-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(245,230,200,0.6);
+    }
+    .badge-icon { color: var(--gold); font-size: 0.9rem; }
+
+    /* ── SECTION COMMONS ── */
+    .section-label {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before, .section-label::after {
+      content: '';
+      height: 1px;
+      width: 30px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+    .section-title {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: bold;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    /* ── MENU SECTION ── */
+    #menu {
+      padding: 6rem 0;
+      background: var(--cream-light);
+    }
+    .menu-header { text-align: center; margin-bottom: 4rem; }
+    .menu-header .section-label { justify-content: center; }
+    .menu-desc {
+      font-style: italic;
+      color: var(--text-light);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(44,24,16,0.08);
+      transition: all 0.3s;
+      border: 1px solid rgba(212,168,83,0.1);
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(44,24,16,0.15);
+      border-color: rgba(212,168,83,0.3);
+    }
+    .menu-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-thumb-espresso {
+      background: linear-gradient(160deg, #3d2314, #6b3d28 50%, #4a2d1a);
+    }
+    .menu-thumb-latte {
+      background: linear-gradient(160deg, #c8943a, #d4a853 50%, #b8803a);
+    }
+    .menu-thumb-matcha {
+      background: linear-gradient(160deg, #3d5a28, #5a8040 50%, #4a7030);
+    }
+    .menu-thumb-croissant {
+      background: linear-gradient(160deg, #c8a06a, #d4b07a 50%, #b8904a);
+    }
+    /* CSS cup icons */
+    .css-cup {
+      position: relative;
+      width: 60px;
+      height: 55px;
+    }
+    .css-cup-body {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 60px; height: 48px;
+      border-radius: 4px 4px 10px 10px;
+    }
+    .css-cup-handle {
+      position: absolute;
+      right: -14px;
+      bottom: 14px;
+      width: 14px; height: 24px;
+      border: 4px solid rgba(255,255,255,0.5);
+      border-left: none;
+      border-radius: 0 12px 12px 0;
+    }
+    .css-cup-rim {
+      position: absolute;
+      top: 0; left: -2px;
+      width: 64px; height: 8px;
+      border-radius: 4px;
+    }
+    .css-cup-liquid {
+      position: absolute;
+      bottom: 4px; left: 6px;
+      width: 48px; height: 30px;
+      border-radius: 2px 2px 8px 8px;
+      opacity: 0.7;
+    }
+    /* croissant CSS shape */
+    .css-croissant {
+      position: relative;
+      width: 70px; height: 45px;
+    }
+    .crescent {
+      position: absolute;
+      width: 60px; height: 40px;
+      border: 14px solid rgba(255,255,255,0.5);
+      border-top-color: transparent;
+      border-radius: 50%;
+      top: 0; left: 5px;
+      transform: rotate(0deg);
+    }
+    .crescent::before {
+      content: '';
+      position: absolute;
+      width: 40px; height: 25px;
+      border: 8px solid rgba(255,255,255,0.3);
+      border-top-color: transparent;
+      border-radius: 50%;
+      top: -4px; left: 2px;
+    }
+
+    .menu-card-body { padding: 1.25rem 1.5rem 1.5rem; }
+    .menu-card-name {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+    .menu-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .menu-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu-price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--brown-mid);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .menu-tag {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.68rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: rgba(212,168,83,0.15);
+      color: var(--brown-warm);
+      border: 1px solid rgba(212,168,83,0.3);
+    }
+
+    /* ── ABOUT SECTION ── */
+    #about {
+      padding: 6rem 0;
+      background: var(--cream-pale);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-main-box {
+      width: 100%;
+      height: 400px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #2c1810 0%, #6b3d28 60%, #8b5e3c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(44,24,16,0.25);
+    }
+    .about-box-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(212,168,83,0.12) 1px, transparent 0);
+      background-size: 20px 20px;
+    }
+    .about-center-text {
+      position: relative;
+      text-align: center;
+    }
+    .about-year {
+      font-size: 5rem;
+      font-weight: bold;
+      color: rgba(212,168,83,0.15);
+      line-height: 1;
+      letter-spacing: -3px;
+      display: block;
+    }
+    .about-est {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-top: -1rem;
+    }
+    .about-tagline-big {
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--cream);
+      margin-top: 1rem;
+      display: block;
+    }
+    .about-badge-float {
+      position: absolute;
+      background: var(--gold);
+      color: var(--brown-deep);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .badge-top { top: -16px; right: 2rem; }
+    .badge-bottom { bottom: -16px; left: 2rem; }
+
+    .about-text-side {}
+    .about-text-side .section-title { margin-bottom: 1.5rem; }
+    .about-body {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .value-card {
+      background: var(--cream-light);
+      border: 1px solid rgba(212,168,83,0.15);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+    }
+    .value-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .value-title {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+    .value-desc {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* ── QUOTE BANNER ── */
+    #quote-banner {
+      background: linear-gradient(135deg, #2c1810, #4a2d1a);
+      padding: 4rem 3rem;
+      text-align: center;
+      border-top: 1px solid rgba(212,168,83,0.1);
+      border-bottom: 1px solid rgba(212,168,83,0.1);
+    }
+    .quote-mark {
+      font-size: 5rem;
+      color: rgba(212,168,83,0.2);
+      line-height: 0.5;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .quote-text {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-style: italic;
+      color: var(--cream);
+      max-width: 700px;
+      margin: 0 auto 1.25rem;
+      line-height: 1.6;
+    }
+    .quote-author {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown-deep);
+      color: rgba(245,230,200,0.6);
+      padding: 4rem 3rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-brand-name {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--cream);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand-tag {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      font-style: italic;
+      max-width: 260px;
+      margin-bottom: 1.5rem;
+    }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,168,83,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: rgba(245,230,200,0.6);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links li a {
+      font-size: 0.88rem;
+      color: rgba(245,230,200,0.55);
+      text-decoration: none;
+      font-style: italic;
+      transition: color 0.2s;
+    }
+    .footer-links li a:hover { color: var(--gold); }
+    .footer-info-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.65rem;
+      color: rgba(245,230,200,0.55);
+      font-style: italic;
+    }
+    .info-icon { color: var(--gold); flex-shrink: 0; }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(212,168,83,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(245,230,200,0.35);
+    }
+    .footer-bottom span { color: var(--gold); opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">☕</div>
+      <div>
+        <div class="nav-logo-text">Maison Brun</div>
+        <span class="nav-logo-sub">Artisan Cafe</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#footer">Find Us</a></li>
+      <li><a href="#" class="nav-cta">Reserve a Table</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-texture"></div>
+    <div class="hero-steam"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          Est. 2018 &bull; Artisan Coffee
+          <span class="eyebrow-line"></span>
+        </div>
+        <h1 class="hero-title">
+          Where Every Cup<br>
+          Tells a <em>Story</em>
+        </h1>
+        <p class="hero-desc">
+          Hand-selected single-origin beans, roasted in-house, brewed with intention.
+          A moment of warmth in every sip.
+        </p>
+        <div class="hero-buttons">
+          <a href="#menu" class="btn-gold">Explore Our Menu</a>
+          <a href="#about" class="btn-outline-cream">Our Story</a>
+        </div>
+        <div class="hero-badges-row">
+          <div class="hero-badge-item"><span class="badge-icon">★</span> Award-Winning Roasts</div>
+          <div class="hero-badge-item"><span class="badge-icon">🌿</span> Sustainably Sourced</div>
+          <div class="hero-badge-item"><span class="badge-icon">☕</span> Open 7am – 9pm</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-cup-scene">
+          <div class="steam-1"><div class="steam-wisp"></div></div>
+          <div class="steam-2"><div class="steam-wisp"></div></div>
+          <div class="steam-3"><div class="steam-wisp"></div></div>
+          <div class="cup-rim"></div>
+          <div class="coffee-surface">
+            <div class="latte-art"></div>
+          </div>
+          <div class="cup-body">
+            <div class="cup-handle"></div>
+          </div>
+          <div class="saucer"></div>
+          <div class="cup-shadow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="section-inner">
+      <div class="menu-header">
+        <div class="section-label">Our Offerings</div>
+        <h2 class="section-title">Crafted with Care</h2>
+        <p class="menu-desc">Each item on our menu is thoughtfully prepared using the finest seasonal ingredients.</p>
+      </div>
+      <div class="menu-grid">
+
+        <!-- Espresso -->
+        <div class="menu-card">
+          <div class="menu-thumb menu-thumb-espresso">
+            <div class="css-cup">
+              <div class="css-cup-rim" style="background:rgba(255,255,255,0.4)"></div>
+              <div class="css-cup-body" style="background:rgba(255,255,255,0.15)"></div>
+              <div class="css-cup-liquid" style="background:rgba(50,20,10,0.8)"></div>
+              <div class="css-cup-handle"></div>
+            </div>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Espresso Noir</div>
+            <p class="menu-card-desc">A ristretto pulled from our house Ethiopian blend. Bold, complex, lingering.</p>
+            <div class="menu-card-footer">
+              <span class="menu-price">$4.50</span>
+              <span class="menu-tag">Signature</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latte -->
+        <div class="menu-card">
+          <div class="menu-thumb menu-thumb-latte">
+            <div class="css-cup" style="width:70px;height:65px">
+              <div class="css-cup-rim" style="background:rgba(255,255,255,0.5);width:74px;left:-2px"></div>
+              <div class="css-cup-body" style="background:rgba(255,255,255,0.2);width:70px;height:56px"></div>
+              <div class="css-cup-liquid" style="background:rgba(245,230,200,0.7);width:58px;height:36px;bottom:5px"></div>
+              <div class="css-cup-handle" style="border-color:rgba(255,255,255,0.4)"></div>
+            </div>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Golden Latte</div>
+            <p class="menu-card-desc">Turmeric-infused oat milk latte with a dusting of cinnamon. Warming &amp; golden.</p>
+            <div class="menu-card-footer">
+              <span class="menu-price">$6.00</span>
+              <span class="menu-tag">Popular</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matcha -->
+        <div class="menu-card">
+          <div class="menu-thumb menu-thumb-matcha">
+            <div class="css-cup" style="width:70px;height:65px">
+              <div class="css-cup-rim" style="background:rgba(255,255,255,0.45);width:74px;left:-2px"></div>
+              <div class="css-cup-body" style="background:rgba(255,255,255,0.15);width:70px;height:56px"></div>
+              <div class="css-cup-liquid" style="background:rgba(100,160,80,0.5);width:58px;height:36px;bottom:5px"></div>
+              <div class="css-cup-handle" style="border-color:rgba(255,255,255,0.4)"></div>
+            </div>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Ceremonial Matcha</div>
+            <p class="menu-card-desc">Organic ceremonial-grade matcha whisked to silk with steamed oat milk.</p>
+            <div class="menu-card-footer">
+              <span class="menu-price">$6.50</span>
+              <span class="menu-tag">Seasonal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Croissant -->
+        <div class="menu-card">
+          <div class="menu-thumb menu-thumb-croissant">
+            <div class="css-croissant">
+              <div class="crescent"></div>
+            </div>
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Butter Croissant</div>
+            <p class="menu-card-desc">Laminated by hand every morning. Shatteringly crisp shell, pillowy interior.</p>
+            <div class="menu-card-footer">
+              <span class="menu-price">$4.00</span>
+              <span class="menu-tag">Baked Fresh</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BANNER -->
+  <div id="quote-banner">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">Coffee is not just a drink. It is a ritual, a pause, a moment of perfect stillness in a rushing world.</p>
+    <div class="quote-author">— Maison Brun Philosophy</div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-main-box">
+            <div class="about-box-pattern"></div>
+            <div class="about-center-text">
+              <span class="about-year">2018</span>
+              <span class="about-est">Established</span>
+              <span class="about-tagline-big">Rooted in craft,<br>grown with love.</span>
+            </div>
+          </div>
+          <div class="about-badge-float badge-top">🏆 Best Cafe 2024 — City Awards</div>
+          <div class="about-badge-float badge-bottom">🌿 100% Sustainable &amp; Fair-Trade</div>
+        </div>
+        <div class="about-text-side">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">A Labor of Love Since 2018</h2>
+          <p class="about-body">
+            Maison Brun began as a small corner roastery tucked away on Rue de la Paix.
+            Founded by cousins Elise and Julien, it was born from a shared obsession:
+            that exceptional coffee changes how people experience their day.
+          </p>
+          <p class="about-body">
+            Today we source directly from family farms across Ethiopia, Colombia, and Japan's
+            rare Kumamoto prefecture. Every bag is roasted in-house on our 1960s cast-iron drum,
+            and every cup is pulled by baristas who trained for months before serving a single espresso.
+          </p>
+          <div class="about-values">
+            <div class="value-card">
+              <div class="value-icon">🌱</div>
+              <div class="value-title">Direct Trade</div>
+              <div class="value-desc">We know every farmer by name. Fair prices, long relationships.</div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🔥</div>
+              <div class="value-title">Small Batch</div>
+              <div class="value-desc">Never more than 12kg per roast. Precision over volume.</div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">♻️</div>
+              <div class="value-title">Zero Waste</div>
+              <div class="value-desc">Coffee grounds become compost. Every cup counts.</div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">❤️</div>
+              <div class="value-title">Community</div>
+              <div class="value-desc">Our table is everyone's table. Always has been.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name">Maison Brun</div>
+        <span class="footer-brand-tag">Artisan Cafe &amp; Roastery</span>
+        <p class="footer-desc">
+          A place where time slows, and coffee becomes a conversation between past and present.
+        </p>
+        <div class="footer-social">
+          <div class="social-btn">𝕏</div>
+          <div class="social-btn">ig</div>
+          <div class="social-btn">fb</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#">Reserve a Table</a></li>
+          <li><a href="#">Buy Coffee Beans</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Hours</div>
+        <div class="footer-info-line">
+          <span class="info-icon">☕</span>
+          <div>Mon–Fri<br>7:00 am – 9:00 pm</div>
+        </div>
+        <div class="footer-info-line">
+          <span class="info-icon">☕</span>
+          <div>Sat–Sun<br>8:00 am – 10:00 pm</div>
+        </div>
+        <div class="footer-info-line" style="margin-top:0.5rem;">
+          <span class="info-icon">📞</span>
+          +1 (555) 234-5678
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Find Us</div>
+        <div class="footer-info-line">
+          <span class="info-icon">📍</span>
+          42 Rue de la Paix<br>Paris, 75008<br>France
+        </div>
+        <div class="footer-info-line" style="margin-top:0.75rem;">
+          <span class="info-icon">✉️</span>
+          hello@maisonbrun.fr
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Maison Brun. All rights reserved.</span>
+      <span>Crafted with <span>♥</span> and too much espresso.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
