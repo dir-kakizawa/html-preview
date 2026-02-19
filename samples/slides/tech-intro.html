@@ -1,66 +1,28 @@
-<style>
-/* tech-intro: .ti-* */
-.ti-hero {
-  position: absolute; inset: 0; margin: -48px -64px;
-  background: linear-gradient(135deg, #1e1f25 0%, #1a3055 50%, #0d2040 100%);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 64px 96px;
-}
-.ti-hero h1 { color: #fff; font-size: 2.4em; letter-spacing: .04em; margin: 0 0 .4em; }
-.ti-hero .ti-sub { color: #5b8fcc; font-size: 1.1em; margin: 0; }
-.ti-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: .75em; margin-top: .6em;
-}
-.ti-card { border-radius: 6px; padding: .65em 1em; }
-.ti-warn { border-left: 4px solid #d45a5a; background: #fff5f5; }
-.ti-ok   { border-left: 4px solid #4aba8a; background: #f0faf5; }
-.ti-card-title { font-weight: 700; margin: 0 0 .2em; font-size: .92em; }
-.ti-card-body  { margin: 0; font-size: .82em; color: #444; }
-.ti-cols {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: start;
-  margin-top: .4em;
-}
-.ti-code-box { background: #1e1f25; border-radius: 8px; overflow: hidden; }
-.ti-code-tab {
-  background: #0d1620; color: #5b8fcc; font-size: .75em;
-  padding: .35em .9em; font-family: monospace;
-}
-.ti-code-body {
-  color: #c9d1d9; font-size: .78em; padding: .75em 1em;
-  font-family: monospace; white-space: pre; line-height: 1.55;
-}
-.ti-tag {
-  display: inline-block; background: #5b8fcc22; color: #5b8fcc;
-  border: 1px solid #5b8fcc55; border-radius: 4px;
-  font-size: .75em; padding: .1em .55em; margin: .15em .1em;
-}
-</style>
-
-<div class="ti-hero">
-  <h1>Your browser is the IDE</h1>
-  <p class="ti-sub">Zero install. Zero setup. Just open and build.</p>
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,#1e1f25 0%,#1a3055 50%,#0d2040 100%);display:flex;flex-direction:column;justify-content:center;padding:64px 96px;">
+  <h1 style="color:#fff;font-size:2.4em;letter-spacing:.04em;margin:0 0 .35em;">Your browser is the IDE</h1>
+  <p style="color:#5b8fcc;font-size:1.1em;margin:0;">Zero install. Zero setup. Just open and build.</p>
 </div>
 
 ---
 
 <h2>The Problem</h2>
 <p style="margin:.2em 0 .5em;font-size:.88em;color:#555;">Why traditional tools slow you down</p>
-<div class="ti-grid">
-  <div class="ti-card ti-warn">
-    <p class="ti-card-title">⚠️ Heavy IDEs</p>
-    <p class="ti-card-body">VS Code, WebStorm, Figma — each requires install, updates, and config.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.75em;margin-top:.5em;">
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #d45a5a;background:#fff5f5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">⚠️ Heavy IDEs</p>
+    <p style="margin:0;font-size:.82em;color:#444;">VS Code, WebStorm, Figma — each requires install, updates, and config.</p>
   </div>
-  <div class="ti-card ti-warn">
-    <p class="ti-card-title">⚠️ Slow Setup</p>
-    <p class="ti-card-body">Installation breaks across machines. Hours lost before a single line.</p>
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #d45a5a;background:#fff5f5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">⚠️ Slow Setup</p>
+    <p style="margin:0;font-size:.82em;color:#444;">Installation breaks across machines. Hours lost before a single line.</p>
   </div>
-  <div class="ti-card ti-warn">
-    <p class="ti-card-title">⚠️ Sharing Friction</p>
-    <p class="ti-card-body">Accounts, plugins, or exports required. Work gets stuck in silos.</p>
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #d45a5a;background:#fff5f5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">⚠️ Sharing Friction</p>
+    <p style="margin:0;font-size:.82em;color:#444;">Accounts, plugins, or exports required. Work gets stuck in silos.</p>
   </div>
-  <div class="ti-card ti-warn">
-    <p class="ti-card-title">⚠️ Broken Flow</p>
-    <p class="ti-card-body">Creative momentum dies the moment setup begins.</p>
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #d45a5a;background:#fff5f5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">⚠️ Broken Flow</p>
+    <p style="margin:0;font-size:.82em;color:#444;">Creative momentum dies the moment setup begins.</p>
   </div>
 </div>
 
@@ -68,22 +30,22 @@
 
 <h2>The Solution</h2>
 <p style="margin:.2em 0 .5em;font-size:.88em;color:#555;">Single HTML files. Nothing to install.</p>
-<div class="ti-grid">
-  <div class="ti-card ti-ok">
-    <p class="ti-card-title">✅ Any Browser</p>
-    <p class="ti-card-body">Chrome, Firefox, Safari — no extensions needed.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.75em;margin-top:.5em;">
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #4aba8a;background:#f0faf5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">✅ Any Browser</p>
+    <p style="margin:0;font-size:.82em;color:#444;">Chrome, Firefox, Safari — no extensions needed.</p>
   </div>
-  <div class="ti-card ti-ok">
-    <p class="ti-card-title">✅ Works Offline</p>
-    <p class="ti-card-body">All logic is self-contained. Internet optional.</p>
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #4aba8a;background:#f0faf5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">✅ Works Offline</p>
+    <p style="margin:0;font-size:.82em;color:#444;">All logic is self-contained. Internet optional.</p>
   </div>
-  <div class="ti-card ti-ok">
-    <p class="ti-card-title">✅ Share Instantly</p>
-    <p class="ti-card-body">Send one file. Recipient opens and uses — done.</p>
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #4aba8a;background:#f0faf5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">✅ Share Instantly</p>
+    <p style="margin:0;font-size:.82em;color:#444;">Send one file. Recipient opens and uses — done.</p>
   </div>
-  <div class="ti-card ti-ok">
-    <p class="ti-card-title">✅ Zero Lock-in</p>
-    <p class="ti-card-body">No accounts. No build step. No vendor dependency.</p>
+  <div style="border-radius:6px;padding:.65em 1em;border-left:4px solid #4aba8a;background:#f0faf5;">
+    <p style="font-weight:700;margin:0 0 .2em;font-size:.92em;">✅ Zero Lock-in</p>
+    <p style="margin:0;font-size:.82em;color:#444;">No accounts. No build step. No vendor dependency.</p>
   </div>
 </div>
 
@@ -91,25 +53,22 @@
 
 <h2>designer.html</h2>
 <p style="margin:.1em 0 .6em;font-size:.88em;color:#555;">A visual HTML layout editor, right in your browser.</p>
-<div class="ti-cols">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2em;align-items:start;">
   <div>
     <div style="margin:0 0 .5em;">
-      <span class="ti-tag">drag &amp; drop</span>
-      <span class="ti-tag">live preview</span>
-      <span class="ti-tag">grid snap</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">drag &amp; drop</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">live preview</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">grid snap</span>
     </div>
     <div style="margin:0 0 .8em;">
-      <span class="ti-tag">export HTML</span>
-      <span class="ti-tag">alignment guides</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">export HTML</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">alignment guides</span>
     </div>
-    <p style="font-size:.85em;color:#444;margin:0;">
-      Insert text, images, shapes, and containers.<br>
-      Export clean HTML with one click.
-    </p>
+    <p style="font-size:.85em;color:#444;margin:0;">Insert text, images, shapes, and containers.<br>Export clean HTML with one click.</p>
   </div>
-  <div class="ti-code-box">
-    <div class="ti-code-tab">designer.html — Output</div>
-    <div class="ti-code-body">&lt;div style="
+  <div style="background:#1e1f25;border-radius:8px;overflow:hidden;">
+    <div style="background:#0d1620;color:#5b8fcc;font-size:.75em;padding:.35em .9em;font-family:monospace;">designer.html — Output</div>
+    <pre style="color:#c9d1d9;font-size:.78em;padding:.75em 1em;font-family:monospace;white-space:pre;line-height:1.55;background:none;border-radius:0;margin:0;">&lt;div style="
   position: absolute;
   left: 120px;
   top: 80px;
@@ -117,7 +76,7 @@
 "&gt;
   &lt;h1&gt;Hello World&lt;/h1&gt;
   &lt;p&gt;Styled visually.&lt;/p&gt;
-&lt;/div&gt;</div>
+&lt;/div&gt;</pre>
   </div>
 </div>
 
@@ -125,25 +84,22 @@
 
 <h2>slides.html</h2>
 <p style="margin:.1em 0 .6em;font-size:.88em;color:#555;">A Markdown &amp; HTML slide editor with instant preview.</p>
-<div class="ti-cols">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2em;align-items:start;">
   <div>
     <div style="margin:0 0 .5em;">
-      <span class="ti-tag">Markdown</span>
-      <span class="ti-tag">raw HTML</span>
-      <span class="ti-tag">split with ---</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">Markdown</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">raw HTML</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">split with ---</span>
     </div>
     <div style="margin:0 0 .8em;">
-      <span class="ti-tag">live preview</span>
-      <span class="ti-tag">fullscreen present</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">live preview</span>
+      <span style="display:inline-block;background:rgba(91,143,204,.13);color:#5b8fcc;border:1px solid rgba(91,143,204,.33);border-radius:4px;font-size:.75em;padding:.1em .55em;margin:.15em .1em;">fullscreen present</span>
     </div>
-    <p style="font-size:.85em;color:#444;margin:0;">
-      This very slide was built with slides.html.<br>
-      Use <code style="background:#f0f1f5;border-radius:3px;padding:0 4px;">---</code> to split slides. Mix Markdown and HTML freely.
-    </p>
+    <p style="font-size:.85em;color:#444;margin:0;">This very slide was built with slides.html.<br>Use <code>---</code> to split slides. Mix Markdown and HTML freely.</p>
   </div>
-  <div class="ti-code-box">
-    <div class="ti-code-tab">slides.html — Source</div>
-    <div class="ti-code-body"># Slide Title
+  <div style="background:#1e1f25;border-radius:8px;overflow:hidden;">
+    <div style="background:#0d1620;color:#5b8fcc;font-size:.75em;padding:.35em .9em;font-family:monospace;">slides.html — Source</div>
+    <pre style="color:#c9d1d9;font-size:.78em;padding:.75em 1em;font-family:monospace;white-space:pre;line-height:1.55;background:none;border-radius:0;margin:0;"># Slide Title
 
 Plain Markdown works.
 
@@ -154,6 +110,6 @@ Plain Markdown works.
   background: #5b8fcc;
   color: #fff;
   padding: 1em;
-"&gt;Style freely.&lt;/div&gt;</div>
+"&gt;Style freely.&lt;/div&gt;</pre>
   </div>
 </div>

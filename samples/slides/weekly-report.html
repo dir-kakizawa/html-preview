@@ -1,80 +1,38 @@
-<style>
-/* weekly-report: .wr-* */
-.wr-header {
-  background: #f0f1f5; border-radius: 8px; padding: .65em 1.2em;
-  display: flex; gap: 2.5em; align-items: center; margin: .4em 0 0;
-}
-.wr-meta { display: flex; flex-direction: column; }
-.wr-meta-label { font-size: .7em; color: #888; text-transform: uppercase; letter-spacing: .06em; }
-.wr-meta-value { font-size: .92em; font-weight: 600; color: #1e1f25; }
-.wr-col3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .8em; margin-top: .5em; }
-.wr-col  { border-radius: 6px; padding: .65em .9em; }
-.wr-done { border-left: 4px solid #4aba8a; background: #f0faf5; }
-.wr-prog { border-left: 4px solid #5b8fcc; background: #f0f4ff; }
-.wr-blk  { border-left: 4px solid #d45a5a; background: #fff5f5; }
-.wr-col-title {
-  font-size: .75em; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .06em; margin: 0 0 .4em;
-}
-.wr-done .wr-col-title { color: #4aba8a; }
-.wr-prog .wr-col-title { color: #5b8fcc; }
-.wr-blk  .wr-col-title { color: #d45a5a; }
-.wr-item { font-size: .83em; margin: .25em 0; color: #333; }
-.wr-badge {
-  display: inline-block; border-radius: 4px; padding: 2px 8px;
-  font-size: .75em; font-weight: 700;
-}
-.wr-ok     { background: #d5f2e5; color: #2a7a55; }
-.wr-behind { background: #fde8e8; color: #a03030; }
-.wr-table { width: 100%; border-collapse: collapse; margin-top: .4em; font-size: .84em; }
-.wr-table th {
-  text-align: left; padding: .32em .6em;
-  background: #f0f1f5; font-size: .8em; color: #555;
-}
-.wr-table td { padding: .32em .6em; border-bottom: 1px solid #e8e9ee; }
-.wr-prio-card {
-  background: #f0f1f5; border-radius: 6px; padding: .45em .8em;
-  display: flex; gap: .55em; align-items: flex-start; margin-bottom: .4em;
-}
-.wr-prio-num  { font-size: 1.05em; font-weight: 700; color: #5b8fcc; flex-shrink: 0; line-height: 1.3; }
-.wr-prio-text { font-size: .84em; color: #333; }
-</style>
-
 <h1 style="margin-bottom:.4em;">Week N — Progress Report</h1>
-<div class="wr-header">
-  <div class="wr-meta">
-    <span class="wr-meta-label">Period</span>
-    <span class="wr-meta-value">YYYY-MM-DD to YYYY-MM-DD</span>
+<div style="background:#f0f1f5;border-radius:8px;padding:.65em 1.2em;display:flex;gap:2.5em;align-items:center;margin:.4em 0 0;">
+  <div style="display:flex;flex-direction:column;">
+    <span style="font-size:.7em;color:#888;text-transform:uppercase;letter-spacing:.06em;">Period</span>
+    <span style="font-size:.92em;font-weight:600;color:#1e1f25;">YYYY-MM-DD to YYYY-MM-DD</span>
   </div>
-  <div class="wr-meta">
-    <span class="wr-meta-label">Team</span>
-    <span class="wr-meta-value">[Team Name]</span>
+  <div style="display:flex;flex-direction:column;">
+    <span style="font-size:.7em;color:#888;text-transform:uppercase;letter-spacing:.06em;">Team</span>
+    <span style="font-size:.92em;font-weight:600;color:#1e1f25;">[Team Name]</span>
   </div>
-  <div class="wr-meta">
-    <span class="wr-meta-label">Reported by</span>
-    <span class="wr-meta-value">[Your Name]</span>
+  <div style="display:flex;flex-direction:column;">
+    <span style="font-size:.7em;color:#888;text-transform:uppercase;letter-spacing:.06em;">Reported by</span>
+    <span style="font-size:.92em;font-weight:600;color:#1e1f25;">[Your Name]</span>
   </div>
 </div>
 
 ---
 
 <h2>This Week</h2>
-<div class="wr-col3">
-  <div class="wr-col wr-done">
-    <p class="wr-col-title">Done</p>
-    <p class="wr-item">✓ Item completed this week</p>
-    <p class="wr-item">✓ Another completed item</p>
-    <p class="wr-item">✓ Third completed item</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8em;margin-top:.5em;">
+  <div style="border-radius:6px;padding:.65em .9em;border-left:4px solid #4aba8a;background:#f0faf5;">
+    <p style="font-size:.75em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4aba8a;margin:0 0 .4em;">Done</p>
+    <p style="font-size:.83em;margin:.25em 0;color:#333;">✓ Item completed this week</p>
+    <p style="font-size:.83em;margin:.25em 0;color:#333;">✓ Another completed item</p>
+    <p style="font-size:.83em;margin:.25em 0;color:#333;">✓ Third completed item</p>
   </div>
-  <div class="wr-col wr-prog">
-    <p class="wr-col-title">In Progress</p>
-    <p class="wr-item">→ Work currently underway</p>
-    <p class="wr-item">→ Another ongoing task</p>
+  <div style="border-radius:6px;padding:.65em .9em;border-left:4px solid #5b8fcc;background:#f0f4ff;">
+    <p style="font-size:.75em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#5b8fcc;margin:0 0 .4em;">In Progress</p>
+    <p style="font-size:.83em;margin:.25em 0;color:#333;">→ Work currently underway</p>
+    <p style="font-size:.83em;margin:.25em 0;color:#333;">→ Another ongoing task</p>
   </div>
-  <div class="wr-col wr-blk">
-    <p class="wr-col-title">Blocked</p>
-    <p class="wr-item">✗ Blocker description</p>
-    <p class="wr-item" style="font-size:.78em;color:#888;">Waiting on [person/team]</p>
+  <div style="border-radius:6px;padding:.65em .9em;border-left:4px solid #d45a5a;background:#fff5f5;">
+    <p style="font-size:.75em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#d45a5a;margin:0 0 .4em;">Blocked</p>
+    <p style="font-size:.83em;margin:.25em 0;color:#333;">✗ Blocker description</p>
+    <p style="font-size:.78em;margin:.25em 0;color:#888;">Waiting on [person/team]</p>
   </div>
 </div>
 
@@ -84,20 +42,49 @@
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2em;align-items:start;margin-top:.4em;">
   <div>
     <p style="font-size:.78em;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.05em;margin:0 0 .45em;">Priorities</p>
-    <div class="wr-prio-card"><span class="wr-prio-num">1</span><span class="wr-prio-text">Top priority for next week</span></div>
-    <div class="wr-prio-card"><span class="wr-prio-num">2</span><span class="wr-prio-text">Second priority</span></div>
-    <div class="wr-prio-card"><span class="wr-prio-num">3</span><span class="wr-prio-text">Third priority</span></div>
+    <div style="background:#f0f1f5;border-radius:6px;padding:.45em .8em;display:flex;gap:.55em;align-items:flex-start;margin-bottom:.4em;">
+      <span style="font-size:1.05em;font-weight:700;color:#5b8fcc;flex-shrink:0;line-height:1.3;">1</span>
+      <span style="font-size:.84em;color:#333;">Top priority for next week</span>
+    </div>
+    <div style="background:#f0f1f5;border-radius:6px;padding:.45em .8em;display:flex;gap:.55em;align-items:flex-start;margin-bottom:.4em;">
+      <span style="font-size:1.05em;font-weight:700;color:#5b8fcc;flex-shrink:0;line-height:1.3;">2</span>
+      <span style="font-size:.84em;color:#333;">Second priority</span>
+    </div>
+    <div style="background:#f0f1f5;border-radius:6px;padding:.45em .8em;display:flex;gap:.55em;align-items:flex-start;">
+      <span style="font-size:1.05em;font-weight:700;color:#5b8fcc;flex-shrink:0;line-height:1.3;">3</span>
+      <span style="font-size:.84em;color:#333;">Third priority</span>
+    </div>
   </div>
   <div>
     <p style="font-size:.78em;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.05em;margin:0 0 .45em;">KPIs</p>
-    <table class="wr-table">
+    <table style="width:100%;border-collapse:collapse;font-size:.84em;">
       <thead>
-        <tr><th>Metric</th><th>Target</th><th>Actual</th><th>Status</th></tr>
+        <tr>
+          <th style="text-align:left;padding:.32em .6em;background:#f0f1f5;font-size:.8em;color:#555;">Metric</th>
+          <th style="text-align:left;padding:.32em .6em;background:#f0f1f5;font-size:.8em;color:#555;">Target</th>
+          <th style="text-align:left;padding:.32em .6em;background:#f0f1f5;font-size:.8em;color:#555;">Actual</th>
+          <th style="text-align:left;padding:.32em .6em;background:#f0f1f5;font-size:.8em;color:#555;">Status</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td>Metric A</td><td>100</td><td>87</td><td><span class="wr-badge wr-behind">BEHIND</span></td></tr>
-        <tr><td>Metric B</td><td>95%</td><td>96%</td><td><span class="wr-badge wr-ok">OK</span></td></tr>
-        <tr><td>Metric C</td><td>&lt; 2s</td><td>1.8s</td><td><span class="wr-badge wr-ok">OK</span></td></tr>
+        <tr>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">Metric A</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">100</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">87</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;"><span style="display:inline-block;border-radius:4px;padding:2px 8px;font-size:.75em;font-weight:700;background:#fde8e8;color:#a03030;">BEHIND</span></td>
+        </tr>
+        <tr>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">Metric B</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">95%</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">96%</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;"><span style="display:inline-block;border-radius:4px;padding:2px 8px;font-size:.75em;font-weight:700;background:#d5f2e5;color:#2a7a55;">OK</span></td>
+        </tr>
+        <tr>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">Metric C</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">&lt; 2s</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;">1.8s</td>
+          <td style="padding:.32em .6em;border-bottom:1px solid #e8e9ee;"><span style="display:inline-block;border-radius:4px;padding:2px 8px;font-size:.75em;font-weight:700;background:#d5f2e5;color:#2a7a55;">OK</span></td>
+        </tr>
       </tbody>
     </table>
     <p style="font-size:.78em;color:#888;margin:.5em 0 0;">Notes / Risks: [Any additional context]</p>
